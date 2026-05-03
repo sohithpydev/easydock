@@ -198,8 +198,8 @@ def main():
                              'repeated runs are made which will be analyzed together.')
 
     docking_group.add_argument('--program', metavar='STRING', required=False,
-                               choices=['vina', 'gnina', 'vina-gpu', 'qvina', 'server', 'generic'],
-                        help='name of a docking program. Choices: vina, gnina, vina-gpu, qvina, server, generic.')
+                               choices=['vina', 'gnina', 'vina-gpu', 'qvina', 'unidock', 'server', 'generic'],
+                        help='name of a docking program. Choices: vina, gnina, vina-gpu, qvina, unidock, server, generic.')
     docking_group.add_argument('--config', metavar='FILENAME', required=False, type=filepath_type,
                         help='YAML file with parameters used by docking program. See documentation for the format.')
     docking_group.add_argument('--ring_sample', action='store_true', default=False,
@@ -314,6 +314,9 @@ def main():
                 from easydock.dock.vina_dock import pred_dock_time
             elif args.program == 'qvina':
                 from easydock.dock.qvina_dock import mol_dock
+                from easydock.dock.vina_dock import pred_dock_time
+            elif args.program == 'unidock':
+                from easydock.dock.unidock_dock import mol_dock
                 from easydock.dock.vina_dock import pred_dock_time
             elif args.program == 'server':
                 from easydock.dock.server_dock import mol_dock

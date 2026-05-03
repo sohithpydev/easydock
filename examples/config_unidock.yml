@@ -1,0 +1,12 @@
+# script_file - absolute or relative to the directory of this file path to the executable file
+script_file: ../../UniDock-Pro-main/build/udp
+protein: protein.pdbqt
+protein_setup: grid.txt
+# Parameters unique to unidock
+search_mode: balance
+# Parameters common to vina/unidock
+exhaustiveness: 8
+n_poses: 10
+seed: 42
+# Optional CPU setting for Unidock (Note: Unidock is GPU-accelerated but can utilize CPUs for some tasks)
+ncpu: 4

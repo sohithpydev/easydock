@@ -8,7 +8,7 @@ EasyDock automates the entire docking process from molecule preparation to resul
 
 ### Key Features
 
-- **Multiple Docking Programs**: Support for Vina, Gnina/Smina, QVina, Vina-GPU and their derivatives
+- **Multiple Docking Programs**: Support for Vina, Gnina/Smina, QVina, Vina-GPU, Unidock-pro and their derivatives
 - **Server-Based Docking**: Containerized docking programs (CarsiDock, SurfDock, Vina-GPU) via a persistent server protocol
 - **Generic Docking**: Run external docking binary or Python script via a YAML config file, without code changes
 - **Automated Preparation**: Molecule validation, salt removal, and stereoisomer enumeration
@@ -28,8 +28,11 @@ conda env create -f env.yml -n easydock
 # or use mamba (should be faster) 
 mamba env create -f env.yml -n easydock
 
-# Run docking
+# Run docking with Vina
 easydock -i input.smi -o output.db --program vina --config config.yml --protonation molgpka -c 4 --sdf
+
+# Run docking with Unidock-pro
+easydock -i input.smi -o output.db --program unidock --config examples/config_unidock.yml --protonation molgpka -c 4 --sdf
 ```
 
 ## Documentation

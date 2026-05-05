@@ -65,16 +65,19 @@ def mol_dock(mol_or_mols, config, ring_sample=False):
 
     try:
         with open(index_fname, 'wt') as index_f:
+            ligand_idx = 0
             for mol, mol_id, ligand_pdbqt_list in prepared_ligands:
                 mol_ligand_files = []
                 for i, ligand_pdbqt in enumerate(ligand_pdbqt_list):
-                    ligand_fd, ligand_fname = tempfile.mkstemp(suffix=f'_ligand_{mol_id}_{i}.pdbqt', text=True)
+                    # Do not use mol_id in the filename since SMILES strings contain '/' and '\'
+                    ligand_fd, ligand_fname = tempfile.mkstemp(suffix=f'_ligand_{ligand_idx}.pdbqt', text=True)
                     os.close(ligand_fd)
                     with open(ligand_fname, 'wt') as f:
                         f.write(ligand_pdbqt)
                     ligand_files.append(ligand_fname)
                     mol_ligand_files.append((ligand_fname, i))
                     index_f.write(ligand_fname + '\n')
+                    ligand_idx += 1
                 ligand_mapping[mol_id] = {'mol': mol, 'files': mol_ligand_files}
 
         cmd = [

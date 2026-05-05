@@ -340,6 +340,8 @@ def main():
                 if raw_format:
                     with sqlite3.connect(args.output, timeout=90) as conn:
                         set_variable(conn, 'database', 'raw_format', raw_format)
+            elif args.program == 'unidock':
+                batch_size = 64  # XXX hardcoded for test purposes
 
             with sqlite3.connect(args.output, timeout=90) as conn:
                 mols = MolQueue(args.output, batch_size=batch_size)
